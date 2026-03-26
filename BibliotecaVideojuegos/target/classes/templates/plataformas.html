@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments/layout :: head('Plataforma - ' + ${nombrePlataforma})}"></th:block>
+</head>
+<body>
+    <th:block th:replace="~{fragments/layout :: header}"></th:block>
+
+    <main>
+        <h2 class="page-title" th:text="${nombrePlataforma}">Plataforma</h2>
+        
+        <div class="grid">
+            <a th:each="juego : ${juegos}" th:href="@{/juego/{id}(id=${juego.id})}" class="card">
+                <img th:if="${juego.imagenUrl != null and !juego.imagenUrl.isEmpty()}" th:src="${juego.imagenUrl}" alt="Imagen de juego" class="card-img">
+                <div th:unless="${juego.imagenUrl != null and !juego.imagenUrl.isEmpty()}" class="card-img" style="display:flex;align-items:center;justify-content:center;">
+                    <span style="color:var(--text-secondary)">Sin imagen</span>
+                </div>
+                <div class="card-content">
+                    <h2 class="card-title" th:text="${juego.nombre}">Nombre de juego</h2>
+                    <span class="card-subtitle" th:text="${juego.plataforma}">Plataforma</span>
+                </div>
+            </a>
+            
+            <a th:href="@{/juego/nuevo(plataforma=${nombrePlataforma})}" class="card card-add">
+                <svg width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="margin-bottom:1rem;">
+                    <line x1="12" y1="5" x2="12" y2="19"></line>
+                    <line x1="5" y1="12" x2="19" y2="12"></line>
+                </svg>
+                Añadir Juego
+            </a>
+        </div>
+    </main>
+
+    <th:block th:replace="~{fragments/layout :: footer}"></th:block>
+</body>
+</html>

@@ -1,0 +1,25 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head th:fragment="head(title)">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title th:text="${title}">Biblioteca de Videojuegos</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+    <link rel="stylesheet" th:href="@{/css/styles.css}">
+</head>
+<body>
+    <header th:fragment="header">
+        <h1>Biblioteca de Juegos</h1>
+        <nav>
+            <a th:href="@{/}" th:classappend="${plataforma == null and juego == null} ? 'active' : ''">Todo</a>
+            <a th:href="@{/plataforma/PC}" th:classappend="${plataforma == 'PC'} ? 'active' : ''">PC</a>
+            <a th:href="@{/plataforma/PlayStation-5}" th:classappend="${plataforma == 'PlayStation 5'} ? 'active' : ''">PlayStation 5</a>
+            <a th:href="@{/plataforma/Switch}" th:classappend="${plataforma == 'Switch'} ? 'active' : ''">Switch</a>
+        </nav>
+    </header>
+
+    <footer th:fragment="footer">
+        <p>Realizado por Francisco</p>
+    </footer>
+</body>
+</html>

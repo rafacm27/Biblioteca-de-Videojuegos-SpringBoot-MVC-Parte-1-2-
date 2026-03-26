@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <th:block th:replace="~{fragments/layout :: head('Nuevo / Editar Juego')}"></th:block>
+</head>
+<body>
+    <th:block th:replace="~{fragments/layout :: header}"></th:block>
+
+    <main>
+        <h2 class="page-title" th:text="${juego.id != null} ? 'Editar ' + ${juego.nombre} : 'Nuevo juego'">Nuevo/Editar juego</h2>
+        
+        <div class="form-container">
+            <form th:action="@{/juego/guardar}" th:object="${juego}" method="post">
+                <!-- Se requiere el ID oculto para las ediciones -->
+                <input type="hidden" th:field="*{id}">
+                
+                <div class="form-group">
+                    <label class="form-label" for="nombre">Nombre</label>
+                    <input type="text" class="form-control" id="nombre" th:field="*{nombre}" required placeholder="Ej: The Last of Us">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="plataforma">Plataforma</label>
+                    <input type="text" class="form-control" id="plataforma" th:field="*{plataforma}" required placeholder="Ej: PlayStation 5">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="anyo">Año de lanzamiento</label>
+                    <input type="number" class="form-control" id="anyo" th:field="*{anyo}" required placeholder="Ej: 2023">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="imagenUrl">URL de la Imagen (opcional)</label>
+                    <input type="url" class="form-control" id="imagenUrl" th:field="*{imagenUrl}" placeholder="https://ejemplo.com/imagen.jpg">
+                </div>
+                
+                <div class="form-group">
+                    <label class="form-label" for="descripcionLarga">Descripción larga del videojuego</label>
+                    <textarea class="form-control" id="descripcionLarga" th:field="*{descripcionLarga}" required placeholder="Escribe aquí los detalles del juego..."></textarea>
+                </div>
+                
+                <div class="form-actions">
+                    <a href="javascript:history.back()" class="btn btn-secondary">Volver</a>
+                    <button type="submit" class="btn btn-primary">Guardar</button>
+                </div>
+            </form>
+        </div>
+    </main>
+
+    <th:block th:replace="~{fragments/layout :: footer}"></th:block>
+</body>
+</html>
